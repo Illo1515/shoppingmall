@@ -2,7 +2,10 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { SupabaseAdapter } from "@auth/supabase-adapter";
 
+export const runtime = 'edge';
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  debug: true,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -15,7 +18,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   }),
   callbacks: {
     async session({ session, user }) {
-      // 세션에 데이터베이스의 실제 userId 주입
       if (session.user && user) {
         session.user.id = user.id;
       }
@@ -23,3 +25,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
 });
+
