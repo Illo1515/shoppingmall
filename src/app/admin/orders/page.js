@@ -1,6 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import Image from "next/image";
-
+export const runtime = 'edge';
 export const runtime = 'edge';
 
 export default async function AdminOrdersPage() {
@@ -40,9 +40,9 @@ export default async function AdminOrdersPage() {
             {orders && orders.map((order) => (
               <tr key={order.id} className="hover:bg-[var(--color-toss-gray-100)]/50 transition-colors">
                 <td className="py-4 px-2 text-sm text-[var(--color-toss-gray-600)]">
-                  {new Date(order.created_at).toLocaleString("ko-KR", { 
-                    year: "numeric", month: "2-digit", day: "2-digit", 
-                    hour: "2-digit", minute: "2-digit" 
+                  {new Date(order.created_at).toLocaleString("ko-KR", {
+                    year: "numeric", month: "2-digit", day: "2-digit",
+                    hour: "2-digit", minute: "2-digit"
                   })}
                 </td>
                 <td className="py-4 px-2">
@@ -64,7 +64,7 @@ export default async function AdminOrdersPage() {
                 </td>
                 <td className="py-4 px-2">
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold 
-                    ${order.status === 'COMPLETED' ? 'bg-blue-50 text-[var(--color-toss-blue)]' : 
+                    ${order.status === 'COMPLETED' ? 'bg-blue-50 text-[var(--color-toss-blue)]' :
                       order.status === 'PENDING' ? 'bg-orange-50 text-orange-600' : 'bg-gray-100 text-gray-600'}`}>
                     {order.status === 'COMPLETED' ? '결제완료' : order.status}
                   </span>
