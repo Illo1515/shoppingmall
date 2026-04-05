@@ -1,16 +1,20 @@
 import ProductCard from "@/components/ProductCard";
 import { createClient } from "@supabase/supabase-js";
-
 // 클라이언트 렌더링이 아닌, Next.js 15의 서버 컴포넌트로 Supabase 직접 통신
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+export const runtime = 'edge';
+
 export default async function Home({ searchParams }) {
-  // 간단한 페이지네이션 로직 (총 18개, 한 페이지 6개)
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+
+  // Next.js 15: searchParams must be awaited
+  const resolvedSearchParams = await searchParams;
+  const page = resolvedSearchParams.page ? parseInt(resolvedSearchParams.page) : 1;
   const limit = 6;
+
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 
@@ -61,12 +65,12 @@ export default async function Home({ searchParams }) {
             const pageNum = i + 1;
             const isActive = page === pageNum;
             return (
-              <a 
+              <a
                 key={pageNum}
                 href={`/?page=${pageNum}`}
                 className={`w-10 h-10 flex items-center justify-center rounded-xl font-semibold transition-colors
-                  ${isActive 
-                    ? "bg-[var(--color-toss-gray-800)] text-white" 
+                  ${isActive
+                    ? "bg-[var(--color-toss-gray-800)] text-white"
                     : "bg-[var(--color-toss-gray-100)] text-[var(--color-toss-gray-600)] hover:bg-[var(--color-toss-gray-200)]"
                   }
                 `}
