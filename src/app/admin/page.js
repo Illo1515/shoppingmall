@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Plus, Edit2, Trash2 } from "lucide-react";
 
+export const runtime = 'edge';
+
 export default async function AdminDashboard() {
   // 관리자 키로 모든 상품 (최신순) 가져오기
   const { data: products } = await supabaseAdmin

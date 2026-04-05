@@ -1,6 +1,8 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import Image from "next/image";
 
+export const runtime = 'edge';
+
 export default async function AdminOrdersPage() {
   // 관리자 권한으로 모든 주문 가져오기 (고객 정보 및 상품 정보 조인)
   const { data: orders, error } = await supabaseAdmin

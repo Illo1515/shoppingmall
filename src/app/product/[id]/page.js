@@ -5,6 +5,8 @@ import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { notFound } from "next/navigation";
 import { createOrder } from "@/lib/order-actions";
 
+export const runtime = 'edge';
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY

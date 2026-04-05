@@ -2,6 +2,8 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
+export const runtime = 'edge';
+
 export async function POST(req) {
   try {
     // 1. 관리자 권한 확인

@@ -6,6 +6,8 @@ import { ArrowLeft, ImagePlus, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { createProduct } from "@/app/admin/actions";
 
+export const runtime = 'edge';
+
 export default function NewProductPage() {
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
