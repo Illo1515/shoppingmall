@@ -4,6 +4,8 @@ import { createClient } from "@supabase/supabase-js";
 import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { notFound } from "next/navigation";
 import { createOrder } from "@/lib/order-actions";
+import AddToCartButton from "@/components/AddToCartButton";
+
 
 export const runtime = 'edge';
 
@@ -70,19 +72,23 @@ export default async function ProductDetailPage({ params }) {
             </span>
           </div>
 
-          <form action={createOrder} className="w-full">
-            <input type="hidden" name="productId" value={product.id} />
-            <input type="hidden" name="price" value={product.price} />
-            <button type="submit" className="toss-btn flex w-full items-center justify-center gap-2 py-5 text-lg">
-              <ShoppingBag className="w-5 h-5" />
-              바로 구매하기
-            </button>
-          </form>
+          <div className="flex flex-col gap-4">
+            <AddToCartButton product={product} />
+            
+            <form action={createOrder} className="w-full">
+              <input type="hidden" name="productId" value={product.id} />
+              <input type="hidden" name="price" value={product.price} />
+              <button type="submit" className="w-full text-[var(--color-toss-gray-500)] hover:text-black py-4 text-sm font-medium border border-[var(--color-toss-gray-200)] rounded-2xl transition-colors">
+                (관리자 테스트) 즉시 주문 기록하기
+              </button>
+            </form>
+          </div>
           
-          <p className="text-center text-[var(--color-toss-gray-500)] text-sm mt-4 leading-relaxed">
-            * 차후 결제 시스템 연동 후 실제 금액이 결제됩니다.<br/>
-            (현재는 클릭 시 Admin 주문 내역에 즉시 기록됩니다)
+          <p className="text-center text-[var(--color-toss-gray-500)] text-xs mt-4 leading-relaxed">
+            * '장바구니'는 브라우저에 임시 저장됩니다.<br/>
+            * '즉시 주문 기록'은 Admin 대시보드 데이터 확인을 위한 테스트용 버튼입니다.
           </p>
+
         </div>
       </div>
     </div>
