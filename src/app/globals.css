@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-toss-blue: #3182f6;
+  --color-toss-blue-hover: #1b64da;
+  --color-toss-gray-100: #f2f4f6;
+  --color-toss-gray-200: #e5e8eb;
+  --color-toss-gray-300: #d1d6db;
+  --color-toss-gray-400: #b0b8c1;
+  --color-toss-gray-500: #8b95a1;
+  --color-toss-gray-600: #6b7684;
+  --color-toss-gray-700: #4e5968;
+  --color-toss-gray-800: #333d4b;
+  --color-toss-gray-900: #191f28;
+
+  --color-background: var(--color-toss-gray-100);
+  --color-foreground: var(--color-toss-gray-900);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-toss-gray-100);
+    color: var(--color-toss-gray-900);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .toss-card {
+    @apply bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-transform duration-300 hover:-translate-y-1;
+  }
+  .toss-btn {
+    @apply bg-[var(--color-toss-blue)] text-white font-semibold py-4 px-6 rounded-2xl w-full text-center hover:bg-[var(--color-toss-blue-hover)] transition-colors active:scale-[0.98];
+  }
+  .toss-input {
+    @apply w-full bg-[var(--color-toss-gray-100)] border border-transparent focus:border-[var(--color-toss-blue)] rounded-2xl py-4 px-5 text-[17px] font-medium outline-none transition-colors;
+  }
+}
