@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateOrderStatus } from "../(dashboard)/actions";
+import { updateOrderStatus } from "@/lib/admin-actions";
 import { Loader2, ChevronDown } from "lucide-react";
 
 export default function OrderStatusButton({ orderId, currentStatus }) {

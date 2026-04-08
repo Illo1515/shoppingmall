@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createProduct } from "../actions";
+import { createProduct } from "@/lib/admin-actions";
 import { Image as ImageIcon, Upload, X, Loader2, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

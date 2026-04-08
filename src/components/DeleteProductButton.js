@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { deleteProduct } from "../(dashboard)/actions";
+import { deleteProduct } from "@/lib/admin-actions";
 import { Trash2, Loader2, AlertCircle } from "lucide-react";
 
 export default function DeleteProductButton({ id }) {
