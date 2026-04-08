@@ -19,8 +19,11 @@ export default function RootLayout({ children }) {
           <main className="flex-1 flex flex-col max-w-5xl mx-auto w-full px-5 py-8">
             {children}
           </main>
-          <footer className="py-10 text-center text-[var(--color-toss-gray-500)] text-sm mt-auto">
-            © 2026 Ojeommu Corporation. All rights reserved.
+          <footer className="py-10 text-center text-[var(--color-toss-gray-500)] text-sm mt-auto flex flex-col items-center gap-2">
+            <p>© 2026 Ojeommu Corporation. All rights reserved.</p>
+            <Link href="/admin/login" className="hover:text-[var(--color-toss-gray-800)] transition-colors underline-offset-4 hover:underline">
+              관리자 로그인
+            </Link>
           </footer>
         </Providers>
       </body>

@@ -59,10 +59,30 @@ CREATE TABLE IF NOT EXISTS orders (
   created_at timestamp with time zone DEFAULT now()
 );
 
--- Enable RLS (Row Level Security) - basic setting for open access in MVP
+-- Enable RLS (Row Level Security)
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE accounts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE verification_tokens ENABLE ROW LEVEL SECURITY;
+ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
+
+-- 1. Product Policies
 CREATE POLICY "Public products are viewable by everyone." ON products FOR SELECT USING (true);
--- Admin only can insert/update (we will use Service Role Key which bypasses RLS)
+
+-- 2. User Policies
+CREATE POLICY "Users can only view their own profile" ON users
+  FOR SELECT USING (auth.uid() = id);
+
+CREATE POLICY "Users can only update their own profile" ON users
+  FOR UPDATE USING (auth.uid() = id);
+
+-- 3. Order Policies
+CREATE POLICY "Users can only view their own orders" ON orders
+  FOR SELECT USING (auth.uid() = "userId");
+
+-- Note: 'accounts', 'sessions', and 'verification_tokens' do not have public policies.
+-- They are managed via the Service Role Key by Auth.js and bypass RLS.
 
 -- Storage Bucket Setup for images
 -- Note: You already created the "products" bucket and made it public in the UI!
