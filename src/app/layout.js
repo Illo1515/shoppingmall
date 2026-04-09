@@ -1,5 +1,6 @@
 import Providers from "@/components/Providers";
 import Header from "@/components/Header";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata = {
