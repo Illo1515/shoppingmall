@@ -3,10 +3,6 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Lock from "lucide-react/dist/esm/icons/lock";
-import User from "lucide-react/dist/esm/icons/user";
-import Loader2 from "lucide-react/dist/esm/icons/loader-2";
-import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
 import Link from "next/link";
 
 export default function AdminLoginPage() {
@@ -48,13 +44,13 @@ export default function AdminLoginPage() {
           href="/" 
           className="inline-flex items-center text-[var(--color-toss-gray-600)] hover:text-[var(--color-toss-gray-900)] mb-8 transition-colors group"
         >
-          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+          <span className="mr-2">←</span>
           홈으로 돌아가기
         </Link>
 
         <div className="bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] text-center animate-in fade-in slide-in-from-bottom-8 duration-500">
-          <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <Lock className="w-8 h-8 text-[var(--color-toss-blue)]" />
+          <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl">
+            🔒
           </div>
           
           <h1 className="text-3xl font-black text-[var(--color-toss-gray-900)] mb-2 tracking-tight">
@@ -70,7 +66,7 @@ export default function AdminLoginPage() {
                 아이디
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-toss-gray-400)]" />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl">👤</span>
                 <input
                   type="text"
                   placeholder="아이디를 입력하세요"
@@ -87,7 +83,7 @@ export default function AdminLoginPage() {
                 비밀번호
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-toss-gray-400)]" />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl">🔒</span>
                 <input
                   type="password"
                   placeholder="비밀번호를 입력하세요"
@@ -111,7 +107,7 @@ export default function AdminLoginPage() {
               className="w-full py-5 mt-6 bg-[var(--color-toss-blue)] hover:bg-[#2069E6] text-white rounded-2xl font-bold text-lg transition-all shadow-[0_10px_20px_rgba(49,130,246,0.2)] flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
             >
               {isLoading ? (
-                <Loader2 className="w-6 h-6 animate-spin" />
+                "..."
               ) : (
                 "로그인하기"
               )}

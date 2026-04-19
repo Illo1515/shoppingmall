@@ -1,10 +1,5 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import Image from "next/image";
-import ListOrdered from "lucide-react/dist/esm/icons/list-ordered";
-import CheckCircle2 from "lucide-react/dist/esm/icons/check-circle-2";
-import Truck from "lucide-react/dist/esm/icons/truck";
-import Clock from "lucide-react/dist/esm/icons/clock";
-import AlertCircle from "lucide-react/dist/esm/icons/alert-circle";
 import OrderStatusButton from "@/components/OrderStatusButton";
 
 export const runtime = 'edge';
@@ -26,10 +21,10 @@ export default async function AdminOrdersPage() {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case 'COMPLETED': return <CheckCircle2 className="w-4 h-4 text-blue-500" />;
-      case 'SHIPPING': return <Truck className="w-4 h-4 text-purple-500" />;
-      case 'PENDING': return <Clock className="w-4 h-4 text-orange-500" />;
-      default: return <AlertCircle className="w-4 h-4 text-gray-500" />;
+      case 'COMPLETED': return <span>✅</span>;
+      case 'SHIPPING': return <span>🚚</span>;
+      case 'PENDING': return <span>🕒</span>;
+      default: return <span>⚠️</span>;
     }
   };
 
@@ -47,7 +42,7 @@ export default async function AdminOrdersPage() {
     <div className="toss-card p-8 rounded-[2rem] animate-in fade-in slide-in-from-bottom-5 duration-700">
       <div className="mb-10">
         <div className="flex items-center gap-2 text-[var(--color-toss-blue)] mb-1">
-          <ListOrdered className="w-5 h-5 font-bold" />
+          <span>📋</span>
           <span className="text-sm font-bold tracking-tight">Order Management</span>
         </div>
         <h1 className="text-3xl font-black text-[var(--color-toss-gray-900)] tracking-tight mb-2">주문 내역</h1>

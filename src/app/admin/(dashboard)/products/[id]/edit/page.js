@@ -3,11 +3,6 @@ export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
 import { updateProduct } from "@/lib/admin-actions";
-import ImageIcon from "lucide-react/dist/esm/icons/image";
-import Upload from "lucide-react/dist/esm/icons/upload";
-import X from "lucide-react/dist/esm/icons/x";
-import Loader2 from "lucide-react/dist/esm/icons/loader-2";
-import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -129,8 +124,8 @@ export default function EditProductPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-20">
-        <Loader2 className="w-10 h-10 animate-spin text-[var(--color-toss-blue)]" />
+      <div className="flex items-center justify-center p-20 font-bold text-[var(--color-toss-blue)]">
+        로딩 중...
       </div>
     );
   }
@@ -138,7 +133,7 @@ export default function EditProductPage() {
   return (
     <div className="max-w-2xl animate-in fade-in slide-in-from-bottom-5 duration-700">
       <Link href="/admin" className="inline-flex items-center text-[var(--color-toss-gray-600)] hover:text-[var(--color-toss-gray-900)] mb-6 transition-colors group">
-        <ArrowLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
+        <span className="mr-1">←</span>
         뒤로가기
       </Link>
 
@@ -164,14 +159,14 @@ export default function EditProductPage() {
                     onClick={() => { setImageFile(null); setPreviewUrl(""); }}
                     className="p-3 bg-white/20 backdrop-blur-md rounded-2xl hover:bg-white/40 transition-colors text-white"
                    >
-                    <X className="w-6 h-6" />
+                    <span className="text-2xl">❌</span>
                    </button>
                 </div>
               </>
             ) : (
               <>
-                <div className="w-16 h-16 bg-white rounded-[1.5rem] flex items-center justify-center shadow-lg mb-4 text-[var(--color-toss-blue)]">
-                  <Upload className="w-8 h-8" />
+                <div className="w-16 h-16 bg-white rounded-[1.5rem] flex items-center justify-center shadow-lg mb-4 text-3xl">
+                  🖼️
                 </div>
                 <p className="font-bold text-[var(--color-toss-gray-800)]">사진을 변경하려면 클릭하세요</p>
                 <input 
@@ -250,7 +245,7 @@ export default function EditProductPage() {
             className="flex-[2] py-5 bg-[var(--color-toss-blue)] hover:bg-[#2069E6] text-white rounded-[1.5rem] font-bold text-lg transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {(isSubmitting || isUploading) ? (
-              <Loader2 className="w-6 h-6 animate-spin" />
+              "..."
             ) : (
               "상품 정보 수정 완료"
             )}

@@ -1,10 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import Link from "next/link";
 import Image from "next/image";
-import Plus from "lucide-react/dist/esm/icons/plus";
-import Edit2 from "lucide-react/dist/esm/icons/edit-2";
-import Trash2 from "lucide-react/dist/esm/icons/trash-2";
-import Package from "lucide-react/dist/esm/icons/package";
 import DeleteProductButton from "@/components/DeleteProductButton";
 
 export const runtime = 'edge';
@@ -25,7 +21,7 @@ export default async function AdminDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
         <div>
           <div className="flex items-center gap-2 text-[var(--color-toss-blue)] mb-1">
-            <Package className="w-5 h-5 font-bold" />
+            <span>📦</span>
             <span className="text-sm font-bold tracking-tight">Product Management</span>
           </div>
           <h1 className="text-3xl font-black text-[var(--color-toss-gray-900)] tracking-tight">상품 관리</h1>
@@ -34,7 +30,7 @@ export default async function AdminDashboard() {
           href="/admin/products/new" 
           className="bg-[var(--color-toss-blue)] text-white px-6 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-[#2069E6] transition-all shadow-[0_10px_20px_rgba(49,130,246,0.15)] active:scale-[0.98]"
         >
-          <Plus className="w-5 h-5" />
+          <span>+</span>
           새 상품 등록
         </Link>
       </div>
@@ -79,12 +75,12 @@ export default async function AdminDashboard() {
                   <div className="flex items-center justify-end gap-2">
                     <Link 
                       href={`/admin/products/${product.id}/edit`}
-                      className="p-3 text-[var(--color-toss-gray-400)] hover:text-[var(--color-toss-blue)] hover:bg-blue-50 rounded-xl transition-all" 
+                      className="p-3 text-[var(--color-toss-gray-400)] hover:text-[var(--color-toss-blue)] hover:bg-blue-50 rounded-xl transition-all text-xl" 
                       title="수정"
                     >
-                      <Edit2 className="w-5 h-5" />
+                      ✏️
                     </Link>
-                    <DeleteProductButton id={product.id} />
+                    <DeleteProductButton productId={product.id} />
                   </div>
                 </td>
               </tr>
@@ -93,7 +89,7 @@ export default async function AdminDashboard() {
               <tr>
                 <td colSpan={5} className="py-24 text-center">
                   <div className="flex flex-col items-center gap-3">
-                    <Package className="w-12 h-12 text-[var(--color-toss-gray-200)]" />
+                    <span className="text-4xl">📦</span>
                     <p className="text-[var(--color-toss-gray-400)] font-bold text-lg">등록된 상품이 없습니다.</p>
                   </div>
                 </td>

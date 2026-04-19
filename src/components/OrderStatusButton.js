@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { updateOrderStatus } from "@/lib/admin-actions";
-import Loader2 from "lucide-react/dist/esm/icons/loader-2";
-import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
 
 export default function OrderStatusButton({ orderId, currentStatus }) {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -37,8 +35,8 @@ export default function OrderStatusButton({ orderId, currentStatus }) {
         disabled={isUpdating}
         className="text-[10px] sm:text-xs bg-[var(--color-toss-gray-100)] hover:bg-[var(--color-toss-gray-200)] text-[var(--color-toss-gray-600)] px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition-all"
       >
-        {isUpdating ? <Loader2 className="w-3 h-3 animate-spin" /> : "상태 변경"}
-        <ChevronDown className="w-3 h-3" />
+        {isUpdating ? "..." : "상태 변경"}
+        <span>▼</span>
       </button>
 
       {showMenu && (

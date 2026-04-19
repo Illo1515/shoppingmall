@@ -3,11 +3,6 @@
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import Trash2 from "lucide-react/dist/esm/icons/trash-2";
-import Plus from "lucide-react/dist/esm/icons/plus";
-import Minus from "lucide-react/dist/esm/icons/minus";
-import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
-import ShoppingBag from "lucide-react/dist/esm/icons/shopping-bag";
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, totalPrice, totalItems } = useCart();
@@ -15,8 +10,8 @@ export default function CartPage() {
   if (cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-32 text-center">
-        <div className="w-20 h-20 bg-[var(--color-toss-gray-100)] rounded-full flex items-center justify-center mb-6">
-          <ShoppingBag className="w-10 h-10 text-[var(--color-toss-gray-400)]" />
+        <div className="w-20 h-20 bg-[var(--color-toss-gray-100)] rounded-full flex items-center justify-center mb-6 text-4xl">
+          🛒
         </div>
         <h2 className="text-2xl font-bold text-[var(--color-toss-gray-900)] mb-2">장바구니가 비어있어요</h2>
         <p className="text-[var(--color-toss-gray-600)] mb-8">원하는 상품을 담아보세요.</p>
@@ -51,16 +46,16 @@ export default function CartPage() {
                   <div className="flex items-center bg-[var(--color-toss-gray-100)] rounded-lg px-1 py-1">
                     <button 
                       onClick={() => updateQuantity(item.id, -1)}
-                      className="p-1 hover:bg-white rounded-md transition-colors"
+                      className="p-1 hover:bg-white rounded-md transition-colors font-bold"
                     >
-                      <Minus className="w-4 h-4" />
+                      -
                     </button>
                     <span className="w-8 text-center font-bold text-sm">{item.quantity}</span>
                     <button 
                       onClick={() => updateQuantity(item.id, 1)}
-                      className="p-1 hover:bg-white rounded-md transition-colors"
+                      className="p-1 hover:bg-white rounded-md transition-colors font-bold"
                     >
-                      <Plus className="w-4 h-4" />
+                      +
                     </button>
                   </div>
                   <span className="font-bold text-[var(--color-toss-gray-900)]">
@@ -71,15 +66,15 @@ export default function CartPage() {
 
               <button 
                 onClick={() => removeFromCart(item.id)}
-                className="p-2 text-[var(--color-toss-gray-400)] hover:text-red-500 transition-colors"
+                className="p-2 text-[var(--color-toss-gray-400)] hover:text-red-500 transition-colors text-xl"
               >
-                <Trash2 className="w-5 h-5" />
+                🗑️
               </button>
             </div>
           ))}
           
-          <Link href="/" className="inline-flex items-center text-[var(--color-toss-gray-600)] hover:text-black font-medium mt-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+          <Link href="/" className="inline-flex items-center text-[var(--color-toss-gray-600)] hover:text-black font-medium mt-4 transition-colors">
+            <span className="mr-2">←</span>
             더 쇼핑하기
           </Link>
         </div>

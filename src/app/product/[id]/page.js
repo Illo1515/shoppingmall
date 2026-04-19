@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
-import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
-import ShoppingBag from "lucide-react/dist/esm/icons/shopping-bag";
 import { notFound } from "next/navigation";
 import { createOrder } from "@/lib/order-actions";
 import AddToCartButton from "@/components/AddToCartButton";
@@ -33,7 +31,7 @@ export default async function ProductDetailPage({ params }) {
   return (
     <div className="w-full max-w-4xl mx-auto pt-6 pb-20">
       <Link href="/" className="inline-flex items-center text-[var(--color-toss-gray-600)] hover:text-[#000] mb-8 font-medium transition-colors">
-        <ArrowLeft className="w-4 h-4 mr-2" />
+        <span className="mr-2">←</span>
         홈으로 돌아가기
       </Link>
 

@@ -1,10 +1,6 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Package from "lucide-react/dist/esm/icons/package";
-import ListOrdered from "lucide-react/dist/esm/icons/list-ordered";
-import Upload from "lucide-react/dist/esm/icons/upload";
-import ShieldX from "lucide-react/dist/esm/icons/shield-x";
 
 export default async function AdminDashboardLayout({ children }) {
   const session = await auth();
@@ -23,15 +19,15 @@ export default async function AdminDashboardLayout({ children }) {
           <h2 className="font-bold text-lg mb-6 text-[var(--color-toss-gray-900)] pl-2">어드민 패널</h2>
           <nav className="flex flex-col gap-2">
             <Link href="/admin" className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[var(--color-toss-gray-100)] text-[var(--color-toss-gray-700)] font-medium transition-colors">
-              <Package className="w-5 h-5" />
+              <span>📦</span>
               상품 관리
             </Link>
             <Link href="/admin/products/new" className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[var(--color-toss-gray-100)] text-[var(--color-toss-gray-700)] font-medium transition-colors">
-              <Upload className="w-5 h-5" />
+              <span>🖼️</span>
               상품 등록
             </Link>
             <Link href="/admin/orders" className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-[var(--color-toss-gray-100)] text-[var(--color-toss-gray-700)] font-medium transition-colors">
-              <ListOrdered className="w-5 h-5" />
+              <span>📋</span>
               주문 관리
             </Link>
           </nav>

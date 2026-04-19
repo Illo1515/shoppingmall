@@ -1,8 +1,6 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
-import ShoppingBag from "lucide-react/dist/esm/icons/shopping-bag";
-import Check from "lucide-react/dist/esm/icons/check";
 import { useState } from "react";
 
 export default function AddToCartButton({ product }) {
@@ -24,12 +22,12 @@ export default function AddToCartButton({ product }) {
     >
       {isAdded ? (
         <>
-          <Check className="w-5 h-5" />
+          <span>✅</span>
           장바구니 담기 완료
         </>
       ) : (
         <>
-          <ShoppingBag className="w-5 h-5" />
+          <span>🛒</span>
           장바구니에 담기
         </>
       )}
