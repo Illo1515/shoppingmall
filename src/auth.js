@@ -25,7 +25,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         // 유저가 제공한 하드코딩된 어드민 정보 확인
         if (
           credentials?.username === "fhwktm" &&
-          credentials?.password === "Fhwktm123@!^"
+          credentials?.password === "fhwktm123"
         ) {
           return {
             id: "admin-id",
