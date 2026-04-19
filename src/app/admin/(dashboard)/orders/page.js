@@ -1,6 +1,10 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import Image from "next/image";
-import { ListOrdered, CheckCircle2, Truck, Clock, AlertCircle } from "lucide-react";
+import ListOrdered from "lucide-react/dist/esm/icons/list-ordered";
+import CheckCircle2 from "lucide-react/dist/esm/icons/check-circle-2";
+import Truck from "lucide-react/dist/esm/icons/truck";
+import Clock from "lucide-react/dist/esm/icons/clock";
+import AlertCircle from "lucide-react/dist/esm/icons/alert-circle";
 import OrderStatusButton from "@/components/OrderStatusButton";
 
 export const runtime = 'edge';

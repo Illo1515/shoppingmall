@@ -1,7 +1,10 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Edit2, Trash2, Package } from "lucide-react";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Edit2 from "lucide-react/dist/esm/icons/edit-2";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import Package from "lucide-react/dist/esm/icons/package";
 import DeleteProductButton from "@/components/DeleteProductButton";
 
 export const runtime = 'edge';

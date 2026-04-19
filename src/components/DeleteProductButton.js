@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { deleteProduct } from "@/lib/admin-actions";
-import { Trash2, Loader2, AlertCircle } from "lucide-react";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import AlertCircle from "lucide-react/dist/esm/icons/alert-circle";
 
 export default function DeleteProductButton({ id }) {
   const [isDeleting, setIsDeleting] = useState(false);

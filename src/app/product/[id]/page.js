@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
-import { ArrowLeft, ShoppingBag } from "lucide-react";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
+import ShoppingBag from "lucide-react/dist/esm/icons/shopping-bag";
 import { notFound } from "next/navigation";
 import { createOrder } from "@/lib/order-actions";
 import AddToCartButton from "@/components/AddToCartButton";

@@ -1,7 +1,10 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Package, ListOrdered, Upload, ShieldX } from "lucide-react";
+import Package from "lucide-react/dist/esm/icons/package";
+import ListOrdered from "lucide-react/dist/esm/icons/list-ordered";
+import Upload from "lucide-react/dist/esm/icons/upload";
+import ShieldX from "lucide-react/dist/esm/icons/shield-x";
 
 export default async function AdminDashboardLayout({ children }) {
   const session = await auth();

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { updateOrderStatus } from "@/lib/admin-actions";
-import { Loader2, ChevronDown } from "lucide-react";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
 
 export default function OrderStatusButton({ orderId, currentStatus }) {
   const [isUpdating, setIsUpdating] = useState(false);

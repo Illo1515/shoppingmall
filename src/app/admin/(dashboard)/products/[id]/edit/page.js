@@ -3,7 +3,11 @@ export const runtime = 'edge';
 
 import { useState, useEffect } from "react";
 import { updateProduct } from "@/lib/admin-actions";
-import { Image as ImageIcon, Upload, X, Loader2, ArrowLeft } from "lucide-react";
+import ImageIcon from "lucide-react/dist/esm/icons/image";
+import Upload from "lucide-react/dist/esm/icons/upload";
+import X from "lucide-react/dist/esm/icons/x";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";

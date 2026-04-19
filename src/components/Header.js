@@ -2,7 +2,10 @@
 
 import { SessionProvider, useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
-import { LogIn, LogOut, Settings, ShoppingBag } from "lucide-react";
+import LogIn from "lucide-react/dist/esm/icons/log-in";
+import LogOut from "lucide-react/dist/esm/icons/log-out";
+import Settings from "lucide-react/dist/esm/icons/settings";
+import ShoppingBag from "lucide-react/dist/esm/icons/shopping-bag";
 import { useCart } from "@/context/CartContext";
 
 

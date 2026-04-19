@@ -1,7 +1,8 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
-import { ShoppingBag, Check } from "lucide-react";
+import ShoppingBag from "lucide-react/dist/esm/icons/shopping-bag";
+import Check from "lucide-react/dist/esm/icons/check";
 import { useState } from "react";
 
 export default function AddToCartButton({ product }) {

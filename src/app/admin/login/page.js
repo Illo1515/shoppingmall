@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Lock, User, Loader2, ArrowLeft } from "lucide-react";
+import Lock from "lucide-react/dist/esm/icons/lock";
+import User from "lucide-react/dist/esm/icons/user";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
 import Link from "next/link";
 
 export default function AdminLoginPage() {
