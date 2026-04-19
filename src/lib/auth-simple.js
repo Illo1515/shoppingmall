@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const secret = new TextEncoder().encode(
-  process.env.AUTH_SECRET || "fallback-secret-for-dev"
+  process.env.AUTH_SECRET || "fallback-secret-for-dev-1234567890-secure"
 );
 
 const SESSION_NAME = "admin_session";
