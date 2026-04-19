@@ -1,28 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@supabase/supabase-js";
+import { supabaseFetch } from "@/lib/supabase-fetch";
 import { notFound } from "next/navigation";
 import { createOrder } from "@/lib/order-actions";
 import AddToCartButton from "@/components/AddToCartButton";
 
-
 export const runtime = 'edge';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 export default async function ProductDetailPage({ params }) {
   // await params in Next.js 15
   const resolvedParams = await params;
   const { id } = resolvedParams;
 
-  const { data: product, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data: products, error } = await supabaseFetch("products", {
+    query: `select=*&id=eq.${id}`
+  });
+
+  const product = products?.[0];
 
   if (error || !product) {
     notFound();

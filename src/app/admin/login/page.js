@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { adminLoginAction } from "@/lib/auth-actions";
 import Link from "next/link";
 
 export default function AdminLoginPage() {
@@ -18,14 +18,10 @@ export default function AdminLoginPage() {
     setError("");
 
     try {
-      const result = await signIn("credentials", {
-        username,
-        password,
-        redirect: false,
-      });
+      const result = await adminLoginAction(username, password);
 
       if (result?.error) {
-        setError("아이디 또는 비밀번호가 올바르지 않습니다.");
+        setError(result.error);
       } else {
         router.push("/admin");
         router.refresh();

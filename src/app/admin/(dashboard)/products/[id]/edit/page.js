@@ -6,12 +6,6 @@ import { updateProduct } from "@/lib/admin-actions";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 export default function EditProductPage() {
   const params = useParams();
@@ -32,13 +26,17 @@ export default function EditProductPage() {
 
   useEffect(() => {
     async function fetchProduct() {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .eq("id", params.id)
-        .single();
+      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/products?id=eq.${params.id}`;
+      const response = await fetch(url, {
+        headers: {
+          'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`
+        }
+      });
+      const products = await response.json();
+      const data = products?.[0];
 
-      if (error || !data) {
+      if (!response.ok || !data) {
         alert("상품을 불러오는데 실패했습니다.");
         router.push("/admin");
         return;

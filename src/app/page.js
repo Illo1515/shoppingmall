@@ -1,15 +1,9 @@
 import ProductCard from "@/components/ProductCard";
-import { createClient } from "@supabase/supabase-js";
-// 클라이언트 렌더링이 아닌, Next.js 15의 서버 컴포넌트로 Supabase 직접 통신
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+import { supabaseFetch } from "@/lib/supabase-fetch";
 
 export const runtime = 'edge';
 
 export default async function Home({ searchParams }) {
-
   // Next.js 15: searchParams must be awaited
   const resolvedSearchParams = await searchParams;
   const page = resolvedSearchParams.page ? parseInt(resolvedSearchParams.page) : 1;
@@ -18,12 +12,11 @@ export default async function Home({ searchParams }) {
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 
-  // Supabase에서 상품 데이터 가져오기
-  const { data: products, error, count } = await supabase
-    .from('products')
-    .select('*', { count: 'exact' })
-    .order('created_at', { ascending: false })
-    .range(from, to);
+  // Supabase Fetch를 사용하여 데이터 가져오기 (범위 및 정렬 처리)
+  const { data: products, error, count } = await supabaseFetch('products', {
+    query: `select=*&order=created_at.desc&limit=${limit}&offset=${from}`,
+    count: 'exact'
+  });
 
   const totalPages = count ? Math.ceil(count / limit) : 1;
 

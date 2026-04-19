@@ -1,19 +1,15 @@
-import { supabaseAdmin } from "@/lib/supabase";
+import { supabaseFetch } from "@/lib/supabase-fetch";
 import Image from "next/image";
 import OrderStatusButton from "@/components/OrderStatusButton";
 
 export const runtime = 'edge';
 
 export default async function AdminOrdersPage() {
-  // 관리자 권한으로 모든 주문 가져오기
-  const { data: orders, error } = await supabaseAdmin
-    .from("orders")
-    .select(`
-      *,
-      users!inner(name, email),
-      products!inner(name, image_url)
-    `)
-    .order("created_at", { ascending: false });
+  // 관리자 권한으로 모든 주문 가져오기 (Join 처리)
+  const { data: orders, error } = await supabaseFetch("orders", {
+    query: "select=*,users(name,email),products(name,image_url)&order=created_at.desc",
+    isAdmin: true
+  });
 
   if (error) {
     console.error("Order Fetch Error:", error);

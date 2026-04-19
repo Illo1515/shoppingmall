@@ -1,14 +1,14 @@
 "use server";
 
-import { supabaseAdmin } from "@/lib/supabase";
+import { supabaseFetch } from "@/lib/supabase-fetch";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { getSession } from "@/lib/auth-simple";
 
 // 권한 확인 헬퍼 함수
 async function ensureAdmin() {
-  const session = await auth();
-  if (!session?.user?.isAdmin) {
+  const session = await getSession();
+  if (!session?.isAdmin) {
     throw new Error("관리자 권한이 필요합니다.");
   }
 }
@@ -26,15 +26,17 @@ export async function createProduct(formData) {
     throw new Error("이름과 이미지는 필수 항목입니다.");
   }
 
-  const { error } = await supabaseAdmin.from("products").insert([
-    {
+  const { error } = await supabaseFetch("products", {
+    method: 'POST',
+    body: {
       name,
       description,
       price,
       category,
       image_url,
     },
-  ]);
+    isAdmin: true
+  });
 
   if (error) {
     console.error("DB Insert Error:", error);
@@ -60,16 +62,18 @@ export async function updateProduct(formData) {
     throw new Error("필수 항목이 누락되었습니다.");
   }
 
-  const { error } = await supabaseAdmin
-    .from("products")
-    .update({
+  const { error } = await supabaseFetch("products", {
+    method: 'PATCH',
+    query: `id=eq.${id}`,
+    body: {
       name,
       description,
       price,
       category,
       image_url,
-    })
-    .eq("id", id);
+    },
+    isAdmin: true
+  });
 
   if (error) {
     console.error("DB Update Error:", error);
@@ -87,7 +91,12 @@ export async function deleteProduct(id) {
 
   if (!id) return;
 
-  const { error } = await supabaseAdmin.from("products").delete().eq("id", id);
+  const { error } = await supabaseFetch("products", {
+    method: 'DELETE',
+    query: `id=eq.${id}`,
+    isAdmin: true
+  });
+
   if (error) {
     console.error("Delete Error:", error);
     throw new Error("삭제 실패");
@@ -100,10 +109,12 @@ export async function deleteProduct(id) {
 export async function updateOrderStatus(orderId, status) {
   await ensureAdmin();
 
-  const { error } = await supabaseAdmin
-    .from("orders")
-    .update({ status })
-    .eq("id", orderId);
+  const { error } = await supabaseFetch("orders", {
+    method: 'PATCH',
+    query: `id=eq.${orderId}`,
+    body: { status },
+    isAdmin: true
+  });
 
   if (error) {
     console.error("Order Status Update Error:", error);

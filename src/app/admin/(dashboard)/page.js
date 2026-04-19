@@ -1,4 +1,4 @@
-import { supabaseAdmin } from "@/lib/supabase";
+import { supabaseFetch } from "@/lib/supabase-fetch";
 import Link from "next/link";
 import Image from "next/image";
 import DeleteProductButton from "@/components/DeleteProductButton";
@@ -7,10 +7,10 @@ export const runtime = 'edge';
 
 export default async function AdminDashboard() {
   // 관리자 키로 모든 상품 (최신순) 가져오기
-  const { data: products, error } = await supabaseAdmin
-    .from("products")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data: products, error } = await supabaseFetch("products", {
+    query: "select=*&order=created_at.desc",
+    isAdmin: true
+  });
 
   if (error) {
     console.error("Fetch Products Error:", error);

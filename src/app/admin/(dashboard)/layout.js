@@ -1,10 +1,10 @@
-import { auth } from "@/auth";
+import { getSession } from "@/lib/auth-simple";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function AdminDashboardLayout({ children }) {
-  const session = await auth();
-  const isAdmin = session?.user?.isAdmin;
+  const session = await getSession();
+  const isAdmin = session?.isAdmin;
 
   // 로그인하지 않았거나 어드민이 아닐 경우 리다이렉트
   if (!isAdmin) {
