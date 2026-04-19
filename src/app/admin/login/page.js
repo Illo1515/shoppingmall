@@ -27,7 +27,8 @@ export default function AdminLoginPage() {
         router.refresh();
       }
     } catch (err) {
-      setError("로그인 중 오류가 발생했습니다.");
+      console.error(err);
+      setError(`통신 오류 또는 예외 발생: ${err.message || '알 수 없는 에러'}`);
     } finally {
       setIsLoading(false);
     }
