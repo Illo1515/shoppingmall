@@ -1,36 +1,12 @@
-import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
-const secret = new TextEncoder().encode(
-  process.env.AUTH_SECRET || "fallback-secret-for-dev-1234567890-secure"
-);
-
+// 보안을 위해 단순하지만 추측하기 어려운 고유 토큰 사용
+const ADMIN_TOKEN = "ijeommu-admin-survival-token-2026";
 const SESSION_NAME = "admin_session";
 
-export async function encrypt(payload) {
-  return await new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("24h")
-    .sign(secret);
-}
-
-export async function decrypt(input) {
-  try {
-    const { payload } = await jwtVerify(input, secret, {
-      algorithms: ["HS256"],
-    });
-    return payload;
-  } catch (e) {
-    return null;
-  }
-}
-
 export async function login(username) {
-  // 간단한 관리자 세션 생성
-  const session = await encrypt({ username, isAdmin: true });
-  
-  (await cookies()).set(SESSION_NAME, session, {
+  // 제이슨 웹 토큰(JWT) 대신 단순하지만 확실한 세션 토큰 설정
+  (await cookies()).set(SESSION_NAME, ADMIN_TOKEN, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -46,5 +22,10 @@ export async function logout() {
 export async function getSession() {
   const session = (await cookies()).get(SESSION_NAME)?.value;
   if (!session) return null;
-  return await decrypt(session);
+  
+  // 토큰 일치 확인
+  if (session === ADMIN_TOKEN) {
+    return { isAdmin: true, username: "admin" };
+  }
+  return null;
 }
