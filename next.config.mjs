@@ -16,6 +16,9 @@ const nextConfig = {
       }
     ],
   },
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@supabase/supabase-js', 'next-auth']
+  }
 };
 
 export default nextConfig;
